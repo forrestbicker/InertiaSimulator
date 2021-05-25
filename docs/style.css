@@ -1,0 +1,44 @@
+body {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	color: var(--light);
+}
+
+canvas {
+	background-color: var(--light);
+}
+
+.centered-outer {
+    margin: 0 auto;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-child {
+    flex: 1;
+}  
+
+.centered-inner {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+:root {
+    /* colors, will be initialized in js on runtime */
+    --light: #E2E8F0;
+    --dark: #171923;
+}
+
+body {
+	background-color: var(--dark);
+}
+
+h1 {
+    color: var(--light);
+}
+
+p {
+    color: var(--light);
+}

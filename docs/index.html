@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+	<h1>Inertia Simulation</h1>
+
+	<div class="flex-container">
+		<div class="flex-child">
+			<h1>Inertial Frame</h1>
+			<p>frame of refence expereinces no net external force and a constant velocity vector</p>
+			<canvas id="inertial-frame" height="500" width="500"></canvas>
+		</div>
+		<div class="flex-child">
+			<h1>Non-Inertial Frame</h1>
+			<p>frame of refence expereinces a net external force and a variable velocity vector</p>
+			<canvas id="non-inertial-frame" height="500" width="500"></canvas>
+		</div>
+	</div>
+
+	<table>
+		<thead>
+			<th>
+				<h1>Bodies</h1>
+			</th>
+			<th><button>Add Body</button></th>
+		</thead>
+		<tr>
+			<td>
+				<H2>Body 1</H2>
+			</td>
+			<td><button>Color Dropdown</button></td>
+			<td><button>Add Force</button></td>
+			<td><button>Shape Dropdown</button></td>
+			<td><button>\/</button></td>
+		</tr>
+		<tr>
+			<table id="vectors1">
+				<thead>
+					<th></th>
+					<th>x</th>
+					<th>y</th>
+				</thead>
+				<tr>
+					<th>xi</th>
+					<td><input placeholder="Equation"></td>
+					<td><input placeholder="Equation"></td>
+				</tr>
+				<tr>
+					<th>yi</th>
+					<td><input placeholder="Equation"></td>
+					<td><input placeholder="Equation"></td>
+				</tr>
+				<tr>
+					<th><input placeholder="Force Name"></th>
+					<td><input placeholder="Equation"></td>
+					<td><input placeholder="Equation"></td>
+				</tr>
+			</table>
+		</tr>
+		<tr>
+			<td>
+				<table>
+					<tr>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+
+</body>
+
+<script src="./bundle.js"></script>
+
+</html>
