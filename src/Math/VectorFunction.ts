@@ -14,4 +14,17 @@ export class VectorFunction {
 		this.x = parse(xEquation);
 		this.y = parse(yEquation);
 	}
+
+	/** evaluates the function for a given body's position and velocity at a given time
+	 */
+	at(body: Body, time: number): Vector {
+		let mapping: Record<string, number> = { // mapping dict defines variables
+			x: body.r.x,
+			y: body.r.y,
+			vx: body.v.x,
+			yx: body.v.y,
+			t: time
+		}
+		return new Vector(this.x.evaluate(mapping), this.y.evaluate(mapping));
+	}
 }
