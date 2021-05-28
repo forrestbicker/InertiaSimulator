@@ -1,11 +1,12 @@
 import { Body } from "../Body";
 import { Vector } from "./Vector";
 import { parse } from "mathjs";
+import { DynamicVector } from "./DynamicVector";
 
 /**
  * A vector defined as a function that varies
  */
-export class VectorFunction {
+export class VectorFunction implements DynamicVector {
 	public x: math.MathNode;
 	public y: math.MathNode;
 
