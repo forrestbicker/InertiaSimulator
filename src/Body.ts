@@ -51,5 +51,7 @@ export class Body {
 
 		this.time += dt;
 	}
+	public setColor(color: string): void {
+		this.color = color;
 	}
 }
