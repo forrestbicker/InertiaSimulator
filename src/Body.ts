@@ -51,6 +51,15 @@ export class Body {
 
 		this.time += dt;
 	}
+
+	private drawBody(context: CanvasRenderingContext2D, x: number, y: number) {
+		// TODO: add different shape / custom shape drawings
+		context.beginPath();
+		context.arc(x, y + Config.canvasHeight, 10, 0, 2 * Math.PI); // offset to bottom left
+		context.fill();
+		console.log(`${x}, ${y + Config.canvasHeight}`);
+	}
+
 	public setColor(color: string): void {
 		this.color = color;
 	}
