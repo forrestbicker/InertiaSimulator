@@ -1,5 +1,6 @@
 import { config } from "mathjs";
 import { Config } from "./Config";
+import { DynamicVector } from "./Math/DynamicVector";
 import { vect } from "./Math/Util";
 import { Vector } from "./Math/Vector";
 import { VectorFunction } from "./Math/VectorFunction";
@@ -11,7 +12,7 @@ export class Body {
 	public v: Vector;
 	private time: number;
 
-	public forceArr: VectorFunction[];
+	public forceArr: DynamicVector[];
 	public color: string;
 
 	constructor(name: string, ri: Vector, vi: Vector) {
@@ -26,7 +27,7 @@ export class Body {
 		this.time = 0;
 	}
 
-	public addForce(force: VectorFunction): void {
+	public addForce(force: DynamicVector): void {
 		this.forceArr.push(force);
 	}
 
