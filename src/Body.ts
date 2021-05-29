@@ -60,6 +60,32 @@ export class Body {
 		console.log(`${x}, ${y + Config.canvasHeight}`);
 	}
 
+	public drawForce(force: Vector, context: CanvasRenderingContext2D): void {
+		let from: Vector = new Vector(this.r.x, this.r.y + Config.canvasHeight);
+		let to: Vector = new Vector(this.r.x + force.x, this.r.y + Config.canvasHeight - force.y);
+		context.beginPath();
+		context.moveTo(from.x, from.y); // line from the body to the tip of the vector, which is just the coordinates of the body to the coordinates of the body plus the x,y coodinates of the vector
+		context.lineTo(to.x, to.y);
+		context.stroke();
+
+		let headlen = 8;
+
+		// arrowhead
+		context.beginPath();
+		let theta: number = Math.atan2(-force.y, force.x); // angle of the vector
+		context.moveTo(to.x, to.y);
+		context.lineTo(to.x - headlen * Math.cos(theta - Math.PI / 6), to.y - headlen * Math.sin(theta - Math.PI / 6));
+		context.lineTo(to.x - headlen * Math.cos(theta + Math.PI / 6), to.y - headlen * Math.sin(theta + Math.PI / 6));
+		context.lineTo(to.x, to.y);
+		context.fill();
+
+
+		// context.beginPath();
+		// context.moveTo(this.r.x, this.r.y + Config.canvasHeight); // line from the body to the tip of the vector, which is just the coordinates of the body to the coordinates of the body plus the x,y coodinates of the vector
+		// context.lineTo(this.r.x + force.x, this.r.y + Config.canvasHeight - force.y);
+		// context.stroke();
+	}
+
 	public setColor(color: string): void {
 		this.color = color;
 	}
