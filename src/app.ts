@@ -1,9 +1,11 @@
 import { Body } from "./Body";
+import { bindButtons, forceTable, newForce } from "./ButtonBinder";
 import { Config } from "./Config";
 import { vect } from "./Math/Util";
 import { Vector } from "./Math/Vector";
 import { VectorFunction } from "./Math/VectorFunction";
 import { Universe } from "./Universe";
+
 
 let inertialCanvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('inertial-frame');
 let nonInertialCanvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('non-inertial-frame');
@@ -29,3 +31,22 @@ let u: Universe = new Universe(rf, inertialContext, nonInertialContext);
 u.addBody(b1);
 
 u.run();
+bindButtons(u);
+createForce(u, "Gravity", "0", "-9.81");
+
+// u.run();
+
+function createForce(universe: Universe, name: string, xComponent: string, yComponent: string) {
+	newForce(universe);
+
+	// add gravity as a default forcce
+	let forceParameters: HTMLCollectionOf<HTMLTableDataCellElement | HTMLTableHeaderCellElement> = forceTable.rows[2].cells;
+	let forceNameInput: HTMLInputElement = <HTMLInputElement>forceParameters[0].children[0]; // 0th entry is name, 0th child of entry is the input field
+	forceNameInput.value = name; // sets name of first force to gravity
+	let forceXComponentInput: HTMLInputElement = <HTMLInputElement>forceParameters[1].children[0];
+	forceXComponentInput.value =  xComponent;
+	let forceYComponentInput: HTMLInputElement = <HTMLInputElement>forceParameters[2].children[0];
+	forceYComponentInput.value = yComponent;
+}
+
+
