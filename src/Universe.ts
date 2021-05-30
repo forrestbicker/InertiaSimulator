@@ -18,6 +18,22 @@ export class Universe {
 		this.nonInertialContext = nonInertialContext;
 
 	}
+
+	/** add an object to the universe */
+	public addBody(body: Body): void {
+		this.bodies.push(body);
+	}
+
+	/** add a force to the universe */
+	public addForce(force: DynamicVector): void {
+		this.forces.push(force);
+	}
+
+	/** add a force to the universe */
+	public applyForce(force: DynamicVector, body: Body): void {
+		body.addForce(force);
+	}
+
 	/** advance the universe foward in time by interval dt using instantaneous v and a to compute dx and dv*/
 	private step(dt: number): void {
 		for (var i = 0; i < this.bodies.length; i++) {
