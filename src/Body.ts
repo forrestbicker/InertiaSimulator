@@ -61,6 +61,17 @@ export class Body {
 		console.log(`${x}, ${y + Config.canvasHeight}`);
 	}
 
+	public drawInertial(context: CanvasRenderingContext2D): void {
+		context.fillStyle = this.color;
+		context.strokeStyle = this.color;
+
+		for (var i = 0; i < this.forceArr.length; i++) {
+			let f: Vector = this.forceArr[i].at(this, this.time);
+			this.drawForce(f, context);
+		}
+
+		this.drawBody(context, this.r.x, this.r.y);
+	}
 	public drawForce(force: Vector, context: CanvasRenderingContext2D): void {
 		let from: Vector = new Vector(this.r.x, this.r.y + Config.canvasHeight);
 		let to: Vector = new Vector(this.r.x + force.x, this.r.y + Config.canvasHeight - force.y);
