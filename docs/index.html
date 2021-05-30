@@ -23,21 +23,24 @@
 		</div>
 	</div>
 
-	<table>
+	<h1>Force Vectors</h1><button class="dark" id='add-force'>Add Force</button>
+	<table id="force-table">
 		<thead>
-			<th>
-				<h1>Bodies</h1>
-			</th>
-			<th><button>Add Body</button></th>
+			<th>Name</th>
+			<th>x-component</th>
+			<th>y-component</th>
 		</thead>
 		<tr>
-			<td>
-				<H2>Body 1</H2>
-			</td>
-			<td><button>Color Dropdown</button></td>
-			<td><button>Add Force</button></td>
-			<td><button>Shape Dropdown</button></td>
-			<td><button>\/</button></td>
+		</tr>
+	</table>
+	<h1>Bodies</h1><button class="dark" >Add Body</button>
+	<table>
+		<tr class="collapsable">
+			<td><input class="input" type="text" autocomplete="off" value="Body 1"></td>
+			<td><button class="light">Color Dropdown</button></td>
+			<td><button class="light">Add Force</button></td>
+			<td><button class="light">Shape Dropdown</button></td>
+			<td><button class="light">\/</button></td>
 		</tr>
 		<tr>
 			<table id="vectors1">
@@ -47,19 +50,19 @@
 					<th>y</th>
 				</thead>
 				<tr>
-					<th>xi</th>
-					<td><input placeholder="Equation"></td>
-					<td><input placeholder="Equation"></td>
+					<th>r<sub>i</sub></th>
+					<td><input class="input" type="text" autocomplete="off" placeholder="equation"></td>
+					<td><input class="input" type="text" autocomplete="off" placeholder="equation"></td>
 				</tr>
 				<tr>
-					<th>yi</th>
-					<td><input placeholder="Equation"></td>
-					<td><input placeholder="Equation"></td>
+					<th>v<sub>i</sub></th>
+					<td><input class="input" type="text" autocomplete="off" placeholder="equation"></td>
+					<td><input class="input" type="text" autocomplete="off" placeholder="equation"></td>
 				</tr>
 				<tr>
-					<th><input placeholder="Force Name"></th>
-					<td><input placeholder="Equation"></td>
-					<td><input placeholder="Equation"></td>
+					<th><select class="input force-dropdown" type="dropdown">
+							<option value=""></option>
+					</th>
 				</tr>
 			</table>
 		</tr>
