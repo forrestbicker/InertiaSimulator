@@ -72,6 +72,37 @@ export class Body {
 
 		this.drawBody(context, this.r.x, this.r.y);
 	}
+
+	public drawNonInertial(context: CanvasRenderingContext2D, withRespectTo: Body): void {
+		context.fillStyle = this.color;
+		context.strokeStyle = this.color;
+
+		// if the frame of reference is undergoing the same force, then don't draw it
+		// if the frame of reference is undergoing a force that the body is not, draw an reverse fictional force
+		// otherwise, draw forces as normal
+		for (var i = 0; i < this.forceArr.length; i++) {
+			let vectorFunc: DynamicVector = this.forceArr[i];
+			if (!withRespectTo.forceArr.includes(vectorFunc)) { // if the force is applied to the body and not the frame
+				let f: Vector = vectorFunc.at(this, this.time);
+				this.drawForce(f, context);
+			}
+		}
+
+		for (var i = 0; i < withRespectTo.forceArr.length; i++) {
+			let vectorFunc: DynamicVector = withRespectTo.forceArr[i];
+			if (!this.forceArr.includes(vectorFunc)) { // if the force is applied to the frame and not the body
+				let f: Vector = vectorFunc.at(this, this.time);
+				// reverse vector
+				f.x = -f.x;
+				f.y = -f.y;
+				this.drawForce(f, context);
+			}
+		}
+
+
+		this.drawBody(context, this.r.x - withRespectTo.r.x + this.ri.x, this.r.y - withRespectTo.r.y + this.ri.y);
+	}
+
 	public drawForce(force: Vector, context: CanvasRenderingContext2D): void {
 		let from: Vector = new Vector(this.r.x, this.r.y + Config.canvasHeight);
 		let to: Vector = new Vector(this.r.x + force.x, this.r.y + Config.canvasHeight - force.y);
