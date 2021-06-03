@@ -49,6 +49,60 @@ export function newBody(universe: Universe): void {
 	bodyHeader.append(dropdownCell);
 
 	// initial conditions table taking input for the starting values for position and velocity
+	let initialConditionsHeader: HTMLTableRowElement = propertyTable.insertRow();
+	// add column lables
+	initialConditionsHeader.appendChild(document.createElement("th"));
+	let xHead: HTMLTableHeaderCellElement = document.createElement("th");
+	xHead.innerText = "x";
+	let yHead: HTMLTableHeaderCellElement = document.createElement("th");
+	yHead.innerText = "y";
+	initialConditionsHeader.appendChild(xHead);
+	initialConditionsHeader.appendChild(yHead);
+
+	// naming abbreviatinos
+	// trans -> translational
+	// pos -> position
+	// vel -> velocity
+
+	// create translational position input elements
+	let transPosRow: HTMLTableRowElement = propertyTable.insertRow();
+	let transPosLabel: HTMLTableHeaderCellElement = document.createElement("th");
+	transPosLabel.innerHTML = "r<sub>i</sub>";
+	transPosRow.appendChild(transPosLabel);
+
+	let transPosXInputCell: HTMLTableHeaderCellElement = document.createElement("td");
+	let transPosXInputField: HTMLInputElement = createTextInputField();
+	transPosXInputField.placeholder = "equation";
+	transPosXInputCell.appendChild(transPosXInputField);
+	transPosRow.appendChild(transPosXInputCell);
+
+	let transPosYInputCell: HTMLTableHeaderCellElement = document.createElement("td");
+	let transPosYInputField: HTMLInputElement = createTextInputField();
+	transPosYInputField.placeholder = "equation";
+	transPosYInputCell.appendChild(transPosYInputField);
+	transPosRow.appendChild(transPosYInputCell);
+
+	// create translational velocity input elements
+	let transVelRow: HTMLTableRowElement = propertyTable.insertRow();
+	let transVelLabel: HTMLTableHeaderCellElement = document.createElement("th");
+	transVelLabel.innerHTML = "v<sub>i</sub>";
+	transVelRow.appendChild(transVelLabel);
+
+	let transVelXInputCell: HTMLTableHeaderCellElement = document.createElement("td");
+	let transVelXInputField: HTMLInputElement = createTextInputField();
+	transVelXInputField.placeholder = "equation";
+	transVelXInputCell.appendChild(transVelXInputField);
+	transVelRow.appendChild(transVelXInputCell);
+
+	let transVelYInputCell: HTMLTableHeaderCellElement = document.createElement("td");
+	let transVelYInputField: HTMLInputElement = createTextInputField();
+	transVelYInputField.placeholder = "equation";
+	transVelYInputCell.appendChild(transVelYInputField);
+	transVelRow.appendChild(transVelYInputCell);
+
+
+
+	newRow.appendChild(propertyTable);
 
 }
 export function newForce(universe: Universe): void {
