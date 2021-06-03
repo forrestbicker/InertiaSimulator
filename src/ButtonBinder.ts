@@ -52,4 +52,10 @@ export function newForce(universe: Universe): void {
 export function bindButtons(universe: Universe): void {
 	let addForceButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById('add-force')!;
 	addForceButton.onclick = () => { newForce(universe); };
+function createTextInputField(): HTMLInputElement {
+	let input: HTMLInputElement = document.createElement("input");
+	input.className = "input";
+	input.type = "text";
+	input.autocomplete = "off";
+	return input;
 }
