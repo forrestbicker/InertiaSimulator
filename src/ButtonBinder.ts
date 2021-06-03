@@ -2,7 +2,55 @@ import { HTMLVector } from "./Math/HTMLVector";
 import { Universe } from "./Universe";
 
 export let forceTable: HTMLTableElement = <HTMLTableElement>document.getElementById("force-table")!;
+export let bodyTable: HTMLTableElement = <HTMLTableElement>document.getElementById("body-table")!;
+export function newBody(universe: Universe): void {
+	let newRow: HTMLTableRowElement = bodyTable.insertRow();
+	let propertyTable: HTMLTableElement = document.createElement("table");
+	propertyTable.id = `body-${bodyTable.rows.length}`;
 
+	// main header of body table with name, body settings, and option to hide
+	let bodyHeader: HTMLTableSectionElement = propertyTable.createTHead();
+	bodyHeader.className = "collapsable";
+	let color: string = Config.colorNames[(bodyTable.rows.length - 1) % Config.colorNames.length];
+	bodyHeader.style.backgroundColor = Config.colors.get(color)[300];
+	// main header - name input
+	let nameCell: HTMLTableDataCellElement = document.createElement("td");
+	let nameInput: HTMLInputElement = createTextInputField();
+	nameInput.value = `Unnamed Body ${bodyTable.rows.length}`;
+	nameCell.appendChild(nameInput);
+	bodyHeader.appendChild(nameCell);
+	// main header - color selection
+	let colorCell: HTMLTableDataCellElement = document.createElement("td");
+	let colorButton: HTMLButtonElement = document.createElement("button");
+	colorButton.className = "light";
+	colorButton.textContent = "Change Color";
+	colorCell.appendChild(colorButton);
+	bodyHeader.appendChild(colorCell);
+	// main header - force adder
+	let forceCell: HTMLTableDataCellElement = document.createElement("td");
+	let forceButton: HTMLButtonElement = document.createElement("button");
+	forceButton.className = "light";
+	forceButton.textContent = "Add Force";
+	forceCell.appendChild(forceButton);
+	bodyHeader.append(forceCell);
+	// main header - force selector
+	let shapeCell: HTMLTableDataCellElement = document.createElement("td");
+	let shapeButton: HTMLButtonElement = document.createElement("button");
+	shapeButton.className = "light";
+	shapeButton.textContent = "Change Shape";
+	shapeCell.appendChild(shapeButton);
+	bodyHeader.append(shapeCell);
+	// main header - show/hide button
+	let dropdownCell: HTMLTableDataCellElement = document.createElement("td");
+	let dropdownButton: HTMLButtonElement = document.createElement("button");
+	dropdownButton.className = "light";
+	dropdownButton.textContent = "\\/";
+	dropdownCell.appendChild(dropdownButton);
+	bodyHeader.append(dropdownCell);
+
+	// initial conditions table taking input for the starting values for position and velocity
+
+}
 export function newForce(universe: Universe): void {
 	let newRow: HTMLTableRowElement = forceTable.insertRow();
 	let forceId: number = forceTable.rows.length - 2;
