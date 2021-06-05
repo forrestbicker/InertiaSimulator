@@ -1,7 +1,7 @@
+import { Config } from "./Config";
 import { HTMLVector } from "./Math/HTMLVector";
 import { Universe } from "./Universe";
 
-export let forceTable: HTMLTableElement = <HTMLTableElement>document.getElementById("force-table")!;
 export let bodyTable: HTMLTableElement = <HTMLTableElement>document.getElementById("body-table")!;
 export function newBody(universe: Universe): void {
 	let newRow: HTMLTableRowElement = bodyTable.insertRow();
@@ -105,6 +105,7 @@ export function newBody(universe: Universe): void {
 	newRow.appendChild(propertyTable);
 
 }
+export let forceTable: HTMLTableElement = <HTMLTableElement>document.getElementById("force-table")!;
 export function newForce(universe: Universe): void {
 	let newRow: HTMLTableRowElement = forceTable.insertRow();
 	let forceId: number = forceTable.rows.length - 2;
@@ -141,7 +142,7 @@ export function newForce(universe: Universe): void {
 	newRow.appendChild(yCell);
 
 	// add the force to universe
-	universe.addForce(new HTMLVector(nameInput, xInput, yInput)); 
+	universe.addForce(new HTMLVector(nameInput, xInput, yInput));
 
 	// add the force to dropdowns
 	let forceDropdowns: HTMLCollectionOf<Element> = document.getElementsByClassName("force-dropdown");
@@ -154,6 +155,11 @@ export function newForce(universe: Universe): void {
 export function bindButtons(universe: Universe): void {
 	let addForceButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById('add-force')!;
 	addForceButton.onclick = () => { newForce(universe); };
+
+	let addBodyButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById('add-body')!;
+	addBodyButton.onclick = () => { newBody(universe); };
+}
+
 function createTextInputField(): HTMLInputElement {
 	let input: HTMLInputElement = document.createElement("input");
 	input.className = "input";
