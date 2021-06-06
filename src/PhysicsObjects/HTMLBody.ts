@@ -7,9 +7,12 @@ export class HTMLBody extends PhysicsBody {
     viFunc: HTMLVector;
     ri: Vector;
     vi: Vector;
+    nameInput: HTMLInputElement;
     
-    constructor(name: HTMLInputElement, riFunc: HTMLVector, viFunc: HTMLVector) {
-        super(name);
+    constructor(nameInput: HTMLInputElement, riFunc: HTMLVector, viFunc: HTMLVector) {
+        super(nameInput.value); // the name attribute from super is never used in this object, but that should still be safe because name is declared private on PhysicsBody and the HTMLBody's name is only ever retrived through getName()
+        this.nameInput = nameInput;
+
         this.riFunc = riFunc;
         this.viFunc = viFunc;
 
@@ -18,7 +21,7 @@ export class HTMLBody extends PhysicsBody {
         this.vi = new Vector(0, 0);
 
         this.updateRi();
-        this.updateVi();
+        this.updateVi();   
     }
 
 
@@ -38,5 +41,9 @@ export class HTMLBody extends PhysicsBody {
     
     getVi(): Vector {
         return this.vi;
+    }
+
+    public getName(): string {
+        return this.nameInput.value;
     }
 }

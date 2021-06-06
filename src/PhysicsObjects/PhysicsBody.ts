@@ -6,7 +6,7 @@ import { Vector } from "../Math/Vector";
 import { VectorFunction } from "../Math/VectorFunction";
 
 export abstract class PhysicsBody {
-	public name: string;
+	private name: string;
 	public r: Vector;
 	public v: Vector;
 	private time: number;
@@ -30,6 +30,10 @@ export abstract class PhysicsBody {
 
 	public addForce(force: DynamicVector): void {
 		this.forceArr.push(force);
+	}
+
+	public getName(): string {
+		return this.name;
 	}
 
 	public removeForce(force: VectorFunction): void {
