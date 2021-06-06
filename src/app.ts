@@ -1,4 +1,4 @@
-import { Body } from "./Body";
+import { PhysicsBody } from "./PhysicsObjects/PhysicsBody";
 import { bindButtons, forceTable, newForce } from "./ButtonBinder";
 import { Config } from "./Config";
 import { vect } from "./Math/Util";
@@ -18,8 +18,8 @@ nonInertialCanvas.height = Config.canvasHeight;
 let nonInertialContext: CanvasRenderingContext2D = nonInertialCanvas.getContext("2d")!;
 let inertialContext: CanvasRenderingContext2D = inertialCanvas.getContext("2d")!;
 
-let b1: Body = new Body("ball", vect(100, 150), vect(30, 100));
-let rf: Body = new Body("reference", vect(50, 150), vect(0, 0));
+let b1: PhysicsBody = new PhysicsBody("ball", vect(100, 150), vect(5*3, 5*10));
+let rf: PhysicsBody = new PhysicsBody("reference", vect(50, 150), vect(5*1.5, 5*20));
 rf.setColor("#FF0000");
 
 let f: VectorFunction = new VectorFunction("0", "-50");

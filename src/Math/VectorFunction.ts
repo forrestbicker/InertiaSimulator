@@ -1,4 +1,4 @@
-import { Body } from "../Body";
+import { PhysicsBody } from "../PhysicsObjects/PhysicsBody";
 import { Vector } from "./Vector";
 import { parse } from "mathjs";
 import { DynamicVector } from "./DynamicVector";
@@ -18,7 +18,7 @@ export class VectorFunction implements DynamicVector {
 
 	/** evaluates the function for a given body's position and velocity at a given time
 	 */
-	at(body: Body, time: number): Vector {
+	at(body: PhysicsBody, time: number): Vector {
 		let mapping: Record<string, number> = { // mapping dict defines variables
 			x: body.r.x,
 			y: body.r.y,

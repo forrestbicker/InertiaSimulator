@@ -1,11 +1,11 @@
 import { config } from "mathjs";
-import { Config } from "./Config";
-import { DynamicVector } from "./Math/DynamicVector";
-import { vect } from "./Math/Util";
-import { Vector } from "./Math/Vector";
-import { VectorFunction } from "./Math/VectorFunction";
+import { Config } from "../Config";
+import { DynamicVector } from "../Math/DynamicVector";
+import { vect } from "../Math/Util";
+import { Vector } from "../Math/Vector";
+import { VectorFunction } from "../Math/VectorFunction";
 
-export abstract class Body {
+export abstract class PhysicsBody {
 	public name: string;
 	public r: Vector;
 	public v: Vector;
@@ -74,7 +74,7 @@ export abstract class Body {
 		this.drawBody(context, this.r.x, this.r.y);
 	}
 
-	public drawNonInertial(context: CanvasRenderingContext2D, withRespectTo: Body): void {
+	public drawNonInertial(context: CanvasRenderingContext2D, withRespectTo: PhysicsBody): void {
 		context.fillStyle = this.color;
 		context.strokeStyle = this.color;
 
@@ -93,7 +93,7 @@ export abstract class Body {
 			let vectorFunc: DynamicVector = withRespectTo.forceArr[i];
 			if (!this.forceArr.includes(vectorFunc)) { // if the force is applied to the frame and not the body
 				let f: Vector = vectorFunc.at(this, this.time);
-				// reverse vector
+				// reverse vector for fictional force
 				f.x = -f.x;
 				f.y = -f.y;
 				this.drawForce(f, context);
@@ -101,7 +101,7 @@ export abstract class Body {
 		}
 
 
-		this.drawBody(context, this.r.x - withRespectTo.r.x + this.ri.x, this.r.y - withRespectTo.r.y + this.ri.y);
+		this.drawBody(context, this.r.x - withRespectTo.r.x + this.getRi().x, this.r.y - withRespectTo.r.y + this.getRi().y);
 	}
 
 	public drawForce(force: Vector, context: CanvasRenderingContext2D): void {

@@ -1,16 +1,16 @@
-import { Body } from "./Body";
+import { PhysicsBody } from "./PhysicsObjects/PhysicsBody";
 import { Config } from "./Config";
 import { DynamicVector } from "./Math/DynamicVector";
 import { VectorFunction } from "./Math/VectorFunction";
 
 export class Universe {
-	private bodies: Body[];
+	private bodies: PhysicsBody[];
 	private forces: DynamicVector[];
-	private referenceFrame: Body;
+	private referenceFrame: PhysicsBody;
 	private inertialContext: CanvasRenderingContext2D;
 	private nonInertialContext: CanvasRenderingContext2D
 
-	constructor(referenceFrame: Body, inertialContext: CanvasRenderingContext2D, nonInertialContext: CanvasRenderingContext2D) {
+	constructor(referenceFrame: PhysicsBody, inertialContext: CanvasRenderingContext2D, nonInertialContext: CanvasRenderingContext2D) {
 		this.bodies = [];
 		this.forces = [];
 		this.referenceFrame = referenceFrame;
@@ -20,7 +20,7 @@ export class Universe {
 	}
 
 	/** add an object to the universe */
-	public addBody(body: Body): void {
+	public addBody(body: PhysicsBody): void {
 		this.bodies.push(body);
 	}
 
@@ -30,7 +30,7 @@ export class Universe {
 	}
 
 	/** add a force to the universe */
-	public applyForce(force: DynamicVector, body: Body): void {
+	public applyForce(force: DynamicVector, body: PhysicsBody): void {
 		body.addForce(force);
 	}
 

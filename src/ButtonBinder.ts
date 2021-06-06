@@ -1,4 +1,6 @@
+import { PhysicsBody } from "./PhysicsObjects/PhysicsBody";
 import { Config } from "./Config";
+import { HTMLBody } from "./PhysicsObjects/HTMLBody";
 import { HTMLVector } from "./Math/HTMLVector";
 import { Universe } from "./Universe";
 
