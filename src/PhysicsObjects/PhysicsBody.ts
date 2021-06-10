@@ -29,6 +29,13 @@ export abstract class PhysicsBody {
 	abstract getRi(): Vector;
 	abstract getVi(): Vector;
 
+	/** reset body to its initial state in terms of pos, vel, and time */
+	public setInitialState(): void {
+		this.r = new Vector(this.getRi().x, -this.getRi().y);
+		this.v = new Vector(this.getVi().x, -this.getVi().y);
+		this.time = 0;
+	}
+
 	public addForce(force: DynamicVector): void {
 		this.forceArr.push(force);
 	}
