@@ -23,7 +23,7 @@ let b1: PhysicsBody = new StaticBody(vect(100, 150), vect(15, 80), "ball");
 let rf: PhysicsBody = new StaticBody(vect(50, 150), vect(10, 120), "reference");
 rf.setColor("#FF0000");
 
-let f: VectorFunction = new VectorFunction("0", "-50");
+let f: VectorFunction = new VectorFunction("0", "-20", "gravity");
 
 b1.addForce(f);
 rf.addForce(f);

@@ -144,7 +144,6 @@ export function newForce(universe: Universe): void {
 	newRow.appendChild(yCell);
 
 	// add the force to universe
-	universe.addForce(new HTMLVector(nameInput, xInput, yInput));
 
 	// add the force to dropdowns
 	let forceDropdowns: HTMLCollectionOf<Element> = document.getElementsByClassName("force-dropdown");
@@ -152,6 +151,7 @@ export function newForce(universe: Universe): void {
 		let forceDropdown: HTMLSelectElement = <HTMLSelectElement>forceDropdowns[i];
 		forceDropdown.appendChild(new Option(`Unnamed Force ${forceId}`, String(forceId))) // there are two rows already in the table, so minus 2 gives one-based human-readable index
 	}
+	universe.addForce(new HTMLVector(xInput, yInput, nameInput));
 }
 
 export function bindButtons(universe: Universe): void {

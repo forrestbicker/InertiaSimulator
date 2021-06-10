@@ -7,11 +7,16 @@ import { DynamicVector } from "./DynamicVector";
  * A vector defined as a function that varies
  */
 export class VectorFunction implements DynamicVector {
+	public name: string;
 	public x: math.MathNode;
 	public y: math.MathNode;
 
-	constructor(xEquation: string, yEquation: string) {
-		// parses user input function thru mathjs
+	constructor(xEquation: string, yEquation: string, name?: string | undefined) {
+		if (name === undefined) {
+			this.name = "";
+		} else {
+			this.name = name;
+		}		// parses user input function thru mathjs
 		this.x = parse(xEquation);
 		this.y = parse(yEquation);
 	}
@@ -27,5 +32,9 @@ export class VectorFunction implements DynamicVector {
 			t: time
 		}
 		return new Vector(this.x.evaluate(mapping), this.y.evaluate(mapping));
+	}
+
+	public getName(): string {
+		return this.name;
 	}
 }

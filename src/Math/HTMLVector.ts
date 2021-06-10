@@ -7,11 +7,13 @@ import { DynamicVector } from "./DynamicVector";
  * A vector defined as a function that varies where the function is given by a html input field
  */
 export class HTMLVector implements DynamicVector {
-	public xField: HTMLInputElement;
-	public yField: HTMLInputElement;
+	private nameField: HTMLInputElement | undefined;
+	private xField: HTMLInputElement;
+	private yField: HTMLInputElement;
 
-	constructor(name: HTMLInputElement, xField: HTMLInputElement, yField: HTMLInputElement) {
+	constructor(xField: HTMLInputElement, yField: HTMLInputElement, nameField?: HTMLInputElement | undefined) {
 		// stores location of user input field
+		this.nameField = nameField;
 		this.xField = xField;
 		this.yField = yField;
 	}
@@ -31,5 +33,11 @@ export class HTMLVector implements DynamicVector {
 			t: time
 		}
 		return new Vector(xEquation.evaluate(mapping), yEquation.evaluate(mapping));
+	public getName(): string {
+		if (this.nameField === undefined) {
+			return "";
+		} else {
+			return this.nameField.value;
+		}
 	}
 }
