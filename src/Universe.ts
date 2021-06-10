@@ -56,6 +56,15 @@ export class Universe {
 		}
 	}
 
+	private updateInitialConditions(): void {
+		for (var i = 0; i < this.bodies.length; i++) {
+			this.bodies[i].updateRi();
+			this.bodies[i].updateVi();
+		}
+		this.referenceFrame.updateRi();
+		this.referenceFrame.updateVi();
+	}
+
 	public run(): void {
 		if (this.refreshIntervalId != null) {
 			clearInterval(this.refreshIntervalId); // stop the simulation if one is currently going
