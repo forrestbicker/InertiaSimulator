@@ -138,4 +138,10 @@ export abstract class PhysicsBody {
 	public setColor(color: string): void {
 		this.color = color;
 	}
+
+	/** empty method because it is optional. if you want to implement an instance of PhysicsBody where initial conditions can change each time the simulation is rebooted, implement these methods. otherwise, don't and nothinig will happen when they are called */
+	public updateRi(): void {
+	}
+	public updateVi(): void {
+	}
 }
