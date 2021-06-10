@@ -31,21 +31,21 @@ export class HTMLBody extends PhysicsBody {
 
 
     // there is a separate updater method because if we only had a getRi function that evaluated riFunc, then ri would change immediatley when the input field was modified. this is problematic because canvas position drawing are determined relative to ri at the start of the simulation. this way, ri may be updated every time the simulation restarts, but not durring it
-    updateRi(): void {
+    public updateRi(): void {
         let newRi: Vector = this.riFunc.at(this, 0);
         this.ri = newRi;
     }
-    updateVi(): void {
+    public updateVi(): void {
         let newVi: Vector = this.viFunc.at(this, 0);
         this.vi = newVi;
     }
 
-    getRi(): Vector {
-        return this.ri;
+    public getRi(): Vector {
+        return new Vector(this.ri.x, this.ri.y);
     }
-    
-    getVi(): Vector {
-        return this.vi;
+
+    public getVi(): Vector {
+        return new Vector(this.vi.x, this.vi.y);
     }
 
     public getName(): string {

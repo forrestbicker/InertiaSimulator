@@ -18,7 +18,7 @@ export class HTMLVector implements DynamicVector {
 
 	/** evaluates the function for a given body's position and velocity at a given time
 	 */
-	at(body: PhysicsBody, time: number): Vector {
+	public at(body: PhysicsBody, time: number): Vector {
 		// parses out the equation in the input field
 		let xEquation = parse(this.xField.value);
 		let yEquation = parse(this.xField.value);
