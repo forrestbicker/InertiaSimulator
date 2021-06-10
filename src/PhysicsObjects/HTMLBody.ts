@@ -3,11 +3,15 @@ import { HTMLVector } from "../Math/HTMLVector";
 import { Vector } from "../Math/Vector";
 
 export class HTMLBody extends PhysicsBody {
-    riFunc: HTMLVector;
-    viFunc: HTMLVector;
-    ri: Vector;
-    vi: Vector;
     nameInput: HTMLInputElement;
+
+    // these dummy initializations have to be here to oinheriet from abstract, but they get immediatley overwritten by the update functions
+    r: Vector = new Vector(0, 0);
+    v: Vector = new Vector(0, 0);
+    ri: Vector = new Vector(0, 0);
+    vi: Vector = new Vector(0, 0);
+    riFunc: DynamicVector;
+    viFunc: DynamicVector;
     
     constructor(nameInput: HTMLInputElement, riFunc: HTMLVector, viFunc: HTMLVector) {
         super(nameInput.value); // the name attribute from super is never used in this object, but that should still be safe because name is declared private on PhysicsBody and the HTMLBody's name is only ever retrived through getName()
@@ -16,12 +20,13 @@ export class HTMLBody extends PhysicsBody {
         this.riFunc = riFunc;
         this.viFunc = viFunc;
 
-        // these dummy initializations have to be here to oinheriet from abstract, but they get immediatley overwritten by the update functions
-        this.ri = new Vector(0, 0);
-        this.vi = new Vector(0, 0);
-
         this.updateRi();
-        this.updateVi();   
+        this.updateVi();
+
+        this.r = new Vector(this.getRi().x, this.getRi().y);
+        this.v = new Vector(this.getVi().x, this.getVi().y);
+
+        this.setInitialState();
     }
 
 

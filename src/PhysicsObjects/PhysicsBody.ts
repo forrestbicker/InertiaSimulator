@@ -7,9 +7,12 @@ import { VectorFunction } from "../Math/VectorFunction";
 
 export abstract class PhysicsBody {
 	private name: string;
-	public r: Vector;
-	public v: Vector;
 	private time: number;
+
+	abstract r: Vector;
+	abstract v: Vector;
+	abstract ri: Vector; // dummy inits
+	abstract vi: Vector;
 
 	public forceArr: DynamicVector[];
 	public color: string;
@@ -20,8 +23,6 @@ export abstract class PhysicsBody {
 
 		this.forceArr = [];
 
-		this.r = this.getRi();
-		this.v = this.getVi();
 		this.time = 0;
 	}
 
