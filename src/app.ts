@@ -5,6 +5,7 @@ import { vect } from "./Math/Util";
 import { Vector } from "./Math/Vector";
 import { VectorFunction } from "./Math/VectorFunction";
 import { Universe } from "./Universe";
+import { StaticBody } from "./PhysicsObjects/StaticBody";
 
 
 let inertialCanvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('inertial-frame');
@@ -18,8 +19,8 @@ nonInertialCanvas.height = Config.canvasHeight;
 let nonInertialContext: CanvasRenderingContext2D = nonInertialCanvas.getContext("2d")!;
 let inertialContext: CanvasRenderingContext2D = inertialCanvas.getContext("2d")!;
 
-let b1: PhysicsBody = new PhysicsBody("ball", vect(100, 150), vect(5*3, 5*10));
-let rf: PhysicsBody = new PhysicsBody("reference", vect(50, 150), vect(5*1.5, 5*20));
+let b1: PhysicsBody = new StaticBody(vect(100, 150), vect(15, 80), "ball");
+let rf: PhysicsBody = new StaticBody(vect(50, 150), vect(10, 120), "reference");
 rf.setColor("#FF0000");
 
 let f: VectorFunction = new VectorFunction("0", "-50");
