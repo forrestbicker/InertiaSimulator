@@ -21,13 +21,13 @@ export function newBody(universe: Universe): void {
 	nameInput.value = `Unnamed Body ${bodyTable.rows.length}`;
 	nameCell.appendChild(nameInput);
 	bodyHeader.appendChild(nameCell);
-	// main header - color selection
-	let colorCell: HTMLTableDataCellElement = document.createElement("td");
-	let colorButton: HTMLButtonElement = document.createElement("button");
-	colorButton.className = "light";
-	colorButton.textContent = "Change Color";
-	colorCell.appendChild(colorButton);
-	bodyHeader.appendChild(colorCell);
+	// // main header - color selection
+	// let colorCell: HTMLTableDataCellElement = document.createElement("td");
+	// let colorButton: HTMLButtonElement = document.createElement("button");
+	// colorButton.className = "light";
+	// colorButton.textContent = "Change Color";
+	// colorCell.appendChild(colorButton);
+	// bodyHeader.appendChild(colorCell);
 	// main header - force adder
 	let forceCell: HTMLTableDataCellElement = document.createElement("td");
 	let forceButton: HTMLButtonElement = document.createElement("button");

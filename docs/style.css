@@ -46,7 +46,6 @@ p {
 
 table {
 	border-collapse: collapse;
-	width: 50%;
 	/* border: 1px solid rgba(255, 0, 255); */
 }
 
@@ -57,9 +56,9 @@ td {
 	/* border: 1px solid rgba(255, 255, 255); */
 }
 
-tr.collapsable {
+thead.collapsable {
     border: 1px solid rgb(32,34,44);
-    background-color: rgb(154, 230, 180);
+    /* background-color: rgb(154, 230, 180); */
 	border-collapse: collapse;
 }
 
