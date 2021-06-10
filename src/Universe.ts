@@ -9,6 +9,7 @@ export class Universe {
 	private referenceFrame: PhysicsBody;
 	private inertialContext: CanvasRenderingContext2D;
 	private nonInertialContext: CanvasRenderingContext2D
+	private refreshIntervalId: NodeJS.Timeout | null;
 
 	constructor(referenceFrame: PhysicsBody, inertialContext: CanvasRenderingContext2D, nonInertialContext: CanvasRenderingContext2D) {
 		this.bodies = [];
@@ -17,6 +18,7 @@ export class Universe {
 		this.inertialContext = inertialContext;
 		this.nonInertialContext = nonInertialContext;
 
+		this.refreshIntervalId = null; // ID to cancel a setInterval
 	}
 
 	/** add an object to the universe */
@@ -55,9 +57,14 @@ export class Universe {
 	}
 
 	public run(): void {
-		setInterval(() => {
+		if (this.refreshIntervalId != null) {
+			clearInterval(this.refreshIntervalId); // stop the simulation if one is currently going
+		}
+
+
+		this.refreshIntervalId = setInterval(() => {
 			this.step(1 / Math.pow(2, 5));
 			this.draw();
-		}, Math.pow(2, 5))
+		}, Math.pow(2, 5));
 	}
 }

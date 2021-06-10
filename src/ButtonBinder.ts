@@ -160,6 +160,9 @@ export function bindButtons(universe: Universe): void {
 
 	let addBodyButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById('add-body')!;
 	addBodyButton.onclick = () => { newBody(universe); };
+
+	let startSimButtom: HTMLButtonElement = <HTMLButtonElement>document.getElementById('start-sim')!;
+	startSimButtom.onclick = () => { universe.run(); };
 }
 
 function createTextInputField(): HTMLInputElement {

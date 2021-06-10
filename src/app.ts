@@ -31,7 +31,6 @@ rf.addForce(f);
 let u: Universe = new Universe(rf, inertialContext, nonInertialContext);
 u.addBody(b1);
 
-u.run();
 bindButtons(u);
 createForce(u, "Gravity", "0", "-9.81");
 
