@@ -76,6 +76,8 @@ export class Universe {
 			clearInterval(this.refreshIntervalId); // stop the simulation if one is currently going
 		}
 
+		this.updateInitialConditions();
+		this.setInitialState();
 
 		this.refreshIntervalId = setInterval(() => {
 			this.step(1 / Math.pow(2, 5));
