@@ -2,13 +2,15 @@ import { PhysicsBody } from "./PhysicsObjects/PhysicsBody";
 import { Config } from "./Config";
 import { DynamicVector } from "./Math/DynamicVector";
 import { VectorFunction } from "./Math/VectorFunction";
+import { Vector } from "./Math/Vector";
 
 export class Universe {
 	private bodies: PhysicsBody[];
 	private forces: DynamicVector[];
 	private referenceFrame: PhysicsBody;
 	private inertialContext: CanvasRenderingContext2D;
-	private nonInertialContext: CanvasRenderingContext2D
+	private nonInertialContext: CanvasRenderingContext2D;
+
 	private refreshIntervalId: NodeJS.Timeout | null;
 
 	constructor(referenceFrame: PhysicsBody, inertialContext: CanvasRenderingContext2D, nonInertialContext: CanvasRenderingContext2D) {
@@ -71,6 +73,15 @@ export class Universe {
 		}
 		this.referenceFrame.setInitialState();
 	}
+
+	public getForcesLen(): number {
+		return this.forces.length;
+	}
+
+	public getForce(ix: number): DynamicVector {
+		return this.forces[ix];
+	}
+
 	public run(): void {
 		if (this.refreshIntervalId != null) {
 			clearInterval(this.refreshIntervalId); // stop the simulation if one is currently going
