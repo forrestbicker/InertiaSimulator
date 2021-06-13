@@ -1,7 +1,15 @@
+import { map, string } from "mathjs";
+
 export class Config {
-	static fps: number = 32;
-	static canvasWidth: number = 500; // px
-	static canvasHeight: number = 500; // px
+	static readonly fps: number = 32;
+	static readonly canvasWidth: number = 500; // px
+	static readonly canvasHeight: number = 500; // px
+	// 400
+	// darkBackground: '#171923',
+	// lightBackground: '#F7FAFC',
+	// tooltipBackground: '#313D53',
+
+
 	static readonly colors: Map<string, any> = new Map([
 		["plum", {
 			50: '#E9E2E7',
@@ -14,18 +22,6 @@ export class Config {
 			700: '#3E2235',
 			800: '#311A28',
 			900: '#261620',
-		}],
-		["gray", {
-			50: '#F7FAFC',
-			100: '#EDF2F7',
-			200: '#E2E8F0',
-			300: '#CBD5E0',
-			400: '#A0AEC0',
-			500: '#718096',
-			600: '#4A5568',
-			700: '#2D3748',
-			800: '#1A202C',
-			900: '#171923',
 		}],
 		["offgray", {
 			50: '#faf9fa',
