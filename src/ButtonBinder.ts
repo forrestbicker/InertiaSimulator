@@ -1,24 +1,27 @@
 import { PhysicsBody } from "./PhysicsObjects/PhysicsBody";
 import { Config } from "./Config";
 import { HTMLBody } from "./PhysicsObjects/HTMLBody";
+import { DynamicVector } from "./Math/DynamicVector";
 import { HTMLVector } from "./Math/HTMLVector";
+import { Vector } from "./Math/Vector";
 import { Universe } from "./Universe";
 
 export let bodyTable: HTMLTableElement = <HTMLTableElement>document.getElementById("body-table")!;
 export function newBody(universe: Universe): void {
+	let bodyId: number = bodyTable.rows.length; // serves as the zero-based index of the body in the array
 	let newRow: HTMLTableRowElement = bodyTable.insertRow();
 	let propertyTable: HTMLTableElement = document.createElement("table");
-	propertyTable.id = `body-${bodyTable.rows.length}`;
+	propertyTable.id = `body-${bodyId + 1}`;
 
 	// main header of body table with name, body settings, and option to hide
 	let bodyHeader: HTMLTableSectionElement = propertyTable.createTHead();
 	bodyHeader.className = "collapsable";
-	let color: string = Config.colorNames[(bodyTable.rows.length - 1) % Config.colorNames.length];
+	let color: string = Config.colorNames[(bodyId) % Config.colorNames.length];
 	bodyHeader.style.backgroundColor = Config.colors.get(color)[300];
 	// main header - name input
 	let nameCell: HTMLTableDataCellElement = document.createElement("td");
 	let nameInput: HTMLInputElement = createTextInputField();
-	nameInput.value = `Unnamed Body ${bodyTable.rows.length}`;
+	nameInput.value = `Unnamed Body ${bodyId + 1}`;
 	nameCell.appendChild(nameInput);
 	bodyHeader.appendChild(nameCell);
 	// // main header - color selection
@@ -33,6 +36,11 @@ export function newBody(universe: Universe): void {
 	let forceButton: HTMLButtonElement = document.createElement("button");
 	forceButton.className = "light";
 	forceButton.textContent = "Add Force";
+
+	forceButton.onclick = () => {
+		addForceToBody(bodyId, propertyTable, universe);
+	}
+
 	forceCell.appendChild(forceButton);
 	bodyHeader.append(forceCell);
 	// main header - force selector
@@ -171,4 +179,21 @@ function createTextInputField(): HTMLInputElement {
 	input.type = "text";
 	input.autocomplete = "off";
 	return input;
+}
+
+export function addForceToBody(bodyId: number, insertionPoint: HTMLTableElement, universe: Universe) {
+	let newRow: HTMLTableRowElement = insertionPoint.insertRow();
+	let forceSelect: HTMLSelectElement = document.createElement("select");
+	reloadForceSelection(forceSelect, universe);
+	// forceSelect.onclick = () => { reloadForceSelection(forceSelect, universe); };
+	let previouslySelected: number | undefined = undefined;
+	forceSelect.onchange = () => {
+		if (previouslySelected !== undefined) {
+			universe.removeForceFromBody(previouslySelected, bodyId);
+		}
+		universe.addForceToBody(Number(forceSelect.value), bodyId)
+		previouslySelected = Number(forceSelect.value);
+	}
+	newRow.appendChild(forceSelect);
+}
 }
