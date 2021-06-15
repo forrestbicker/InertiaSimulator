@@ -46,6 +46,14 @@ export class Universe {
 		this.referenceFrame.step(dt);
 	}
 
+	public addForceToBody(forceId: number, bodyId: number): void {
+		this.bodies[bodyId].addForce(this.forces[forceId]);
+	}
+
+	public removeForceFromBody(forceId: number, bodyId: number): void {
+		this.bodies[bodyId].removeForce(this.forces[forceId]);
+	}
+
 	private draw(): void {
 		this.inertialContext.clearRect(0, 0, Config.canvasWidth, Config.canvasHeight);
 		this.nonInertialContext.clearRect(0, 0, Config.canvasWidth, Config.canvasHeight);
