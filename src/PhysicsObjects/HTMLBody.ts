@@ -1,6 +1,7 @@
 import { PhysicsBody } from "./PhysicsBody";
 import { HTMLVector } from "../Math/HTMLVector";
 import { Vector } from "../Math/Vector";
+import { DynamicVector } from "../Math/DynamicVector";
 
 export class HTMLBody extends PhysicsBody {
     nameInput: HTMLInputElement;
@@ -13,7 +14,7 @@ export class HTMLBody extends PhysicsBody {
     riFunc: DynamicVector;
     viFunc: DynamicVector;
     
-    constructor(nameInput: HTMLInputElement, riFunc: HTMLVector, viFunc: HTMLVector) {
+    constructor(nameInput: HTMLInputElement, riFunc: DynamicVector, viFunc: DynamicVector) {
         super(nameInput.value); // the name attribute from super is never used in this object, but that should still be safe because name is declared private on PhysicsBody and the HTMLBody's name is only ever retrived through getName()
         this.nameInput = nameInput;
 
