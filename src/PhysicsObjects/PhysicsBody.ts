@@ -94,7 +94,8 @@ export abstract class PhysicsBody {
 			this.drawForce(this.r, f, context);
 		}
 
-		this.drawBody(context, this.r.x, this.r.y);
+		this.drawBody(context, this.r);
+		this.drawInertialPath(context);
 	}
 
 	public drawNonInertial(context: CanvasRenderingContext2D, withRespectTo: PhysicsBody): void {
@@ -132,7 +133,8 @@ export abstract class PhysicsBody {
 		}
 
 
-		this.drawBody(context, this.r.x - withRespectTo.r.x + this.getRi().x, this.r.y - withRespectTo.r.y + this.getRi().y);
+		this.drawBody(context, position);
+		this.drawNonInertialPath(context, withRespectTo);
 	}
 
 	/** draw a force vector `force` starting from the point `origin` onto the canvas `context`*/
