@@ -91,7 +91,7 @@ export abstract class PhysicsBody {
 
 		for (var i = 0; i < this.forceArr.length; i++) {
 			let f: Vector = this.forceArr[i].at(this, this.time);
-			this.drawForce(f, context);
+			this.drawForce(this.r, f, context);
 		}
 
 		this.drawBody(context, this.r.x, this.r.y);
@@ -108,7 +108,7 @@ export abstract class PhysicsBody {
 			let vectorFunc: DynamicVector = this.forceArr[i];
 			if (!withRespectTo.forceArr.includes(vectorFunc)) { // if the force is applied to the body and not the frame
 				let f: Vector = vectorFunc.at(this, this.time);
-				this.drawForce(f, context);
+				this.drawForce(position, f, context);
 			}
 		}
 
