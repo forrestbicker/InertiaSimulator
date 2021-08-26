@@ -162,4 +162,21 @@ export abstract class PhysicsBody {
 	}
 	public updateVi(): void {
 	}
+
+	private drawInertialPath(context: CanvasRenderingContext2D) {
+		context.fillStyle = this.color;
+		context.strokeStyle = this.color;
+	
+		context.beginPath();
+
+		for (var i = 0; i < this.path.length; i++) {
+			context.lineTo(
+				this.path[i].x + Config.canvasOffset.x,
+				this.path[i].y + Config.canvasOffset.y
+			);
+		}
+
+		context.stroke();
+	}
+
 }
