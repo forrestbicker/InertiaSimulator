@@ -73,12 +73,16 @@ export abstract class PhysicsBody {
 		this.time += dt;
 	}
 
-	private drawBody(context: CanvasRenderingContext2D, x: number, y: number) {
+	private drawBody(context: CanvasRenderingContext2D, position: Vector) {
 		// TODO: add different shape / custom shape drawings
 		context.beginPath();
-		context.arc(x, y + Config.canvasHeight, 10, 0, 2 * Math.PI); // offset to bottom left
+		context.arc(
+			position.x,
+			position.y + Config.canvasHeight,
+			10, 0, 2 * Math.PI
+		); // offset to center
 		context.fill();
-		console.log(`${x}, ${y + Config.canvasHeight}`);
+		// console.log(`${x}, ${y + Config.canvasHeight}`);
 	}
 
 	public drawInertial(context: CanvasRenderingContext2D): void {
