@@ -127,9 +127,20 @@ export abstract class PhysicsBody {
 		this.drawBody(context, this.r.x - withRespectTo.r.x + this.getRi().x, this.r.y - withRespectTo.r.y + this.getRi().y);
 	}
 
-	public drawForce(force: Vector, context: CanvasRenderingContext2D): void {
-		let from: Vector = new Vector(this.r.x, this.r.y + Config.canvasHeight);
-		let to: Vector = new Vector(this.r.x + force.x, this.r.y + Config.canvasHeight - force.y);
+	/** draw a force vector `force` starting from the point `origin` onto the canvas `context`*/
+	private drawForce(origin: Vector, force: Vector, context: CanvasRenderingContext2D): void {
+		let scaleFactor: number = Config.fps / 4; // we use fps because dt is determined by fps, and dt ultimatley determines the magnitude of the vector. we must lengthen vector so it is visible, if not scalled up then the entire arrow would be obscured by the circular body. to lengthen the vector we multiply the x and y components of the force by the scale factor
+
+		let from: Vector = new Vector(
+			origin.x + Config.canvasOffset.x,
+			origin.y + Config.canvasOffset.y
+		);
+		let to: Vector = new Vector(
+			from.x + scaleFactor * force.x,
+			from.y - scaleFactor * force.y
+		);
+
+
 		context.beginPath();
 		context.moveTo(from.x, from.y); // line from the body to the tip of the vector, which is just the coordinates of the body to the coordinates of the body plus the x,y coodinates of the vector
 		context.lineTo(to.x, to.y);
