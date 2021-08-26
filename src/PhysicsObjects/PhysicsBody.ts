@@ -17,6 +17,8 @@ export abstract class PhysicsBody {
 	public forceArr: DynamicVector[];
 	public color: string;
 
+	public path: Vector[]
+
 	constructor(name: string) {
 		this.name = name;
 		this.color = "#000000";
@@ -24,6 +26,8 @@ export abstract class PhysicsBody {
 		this.forceArr = [];
 
 		this.time = 0;
+		
+		this.path = []
 	}
 
 	abstract getRi(): Vector;
@@ -34,6 +38,7 @@ export abstract class PhysicsBody {
 		this.r = new Vector(this.getRi().x, -this.getRi().y);
 		this.v = new Vector(this.getVi().x, -this.getVi().y);
 		this.time = 0;
+		this.path = []
 	}
 
 	public addForce(force: DynamicVector): void {
@@ -63,6 +68,8 @@ export abstract class PhysicsBody {
 			this.v.y -= a.y * dt;
 		}
 
+		this.path.push(new Vector(this.r.x, this.r.y)) // log the xy position in every interval
+		// so a path can be drawn
 		this.time += dt;
 	}
 
