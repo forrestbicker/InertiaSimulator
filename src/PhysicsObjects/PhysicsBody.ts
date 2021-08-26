@@ -49,7 +49,7 @@ export abstract class PhysicsBody {
 		return this.name;
 	}
 
-	public removeForce(force: VectorFunction): void {
+	public removeForce(force: DynamicVector): void {
 		let ix: number = this.forceArr.findIndex((element) => element == force);
 		this.forceArr.splice(ix);
 	}
