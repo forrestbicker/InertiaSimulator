@@ -179,4 +179,23 @@ export abstract class PhysicsBody {
 		context.stroke();
 	}
 
+	private drawNonInertialPath(context: CanvasRenderingContext2D, withRespectTo: PhysicsBody) {
+		context.fillStyle = this.color;
+		context.strokeStyle = this.color;
+
+		context.beginPath();
+		for (var i = 0; i < this.path.length; i++) {
+			let frameOffset: Vector = new Vector(
+				withRespectTo.getRi().x - withRespectTo.path[i].x,
+				withRespectTo.getRi().y - withRespectTo.path[i].y
+			); // offset to account for frame of reference
+
+			context.lineTo(
+				this.path[i].x + frameOffset.x + Config.canvasOffset.x,
+				this.path[i].y + frameOffset.y + Config.canvasOffset.y
+			);
+		}
+
+		context.stroke();
+	}
 }
