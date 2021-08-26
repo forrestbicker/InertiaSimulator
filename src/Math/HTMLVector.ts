@@ -23,7 +23,7 @@ export class HTMLVector implements DynamicVector {
 	public at(body: PhysicsBody, time: number): Vector {
 		// parses out the equation in the input field
 		let xEquation = parse(this.xField.value);
-		let yEquation = parse(this.xField.value);
+		let yEquation = parse(this.yField.value);
 
 		let mapping: Record<string, number> = { // mapping dict defines variables
 			x: body.r.x,
@@ -32,7 +32,19 @@ export class HTMLVector implements DynamicVector {
 			yx: body.v.y,
 			t: time
 		}
-		return new Vector(xEquation.evaluate(mapping), yEquation.evaluate(mapping));
+		let xVal: number = xEquation.evaluate(mapping);
+		let yVal: number = yEquation.evaluate(mapping);
+
+		// failsafe: if unable to evaluate expression then set vector component to 0
+		if (xVal === undefined) {
+			xVal = 0;
+		}
+		if (yVal === undefined) {
+			yVal = 0;
+		}
+		return new Vector(xVal, yVal);
+	}
+
 	public getName(): string {
 		if (this.nameField === undefined) {
 			return "";
