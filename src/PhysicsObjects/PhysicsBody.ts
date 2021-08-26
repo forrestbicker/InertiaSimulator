@@ -98,6 +98,12 @@ export abstract class PhysicsBody {
 	}
 
 	public drawNonInertial(context: CanvasRenderingContext2D, withRespectTo: PhysicsBody): void {
+		let frameOffset: Vector = new Vector(
+			withRespectTo.getRi().x - withRespectTo.r.x,
+			withRespectTo.getRi().y - withRespectTo.r.y
+		)
+		let position: Vector = new Vector(this.r.x + frameOffset.x, this.r.y + frameOffset.y); // the modified position to account for non-intertal reference frame
+
 		context.fillStyle = this.color;
 		context.strokeStyle = this.color;
 
