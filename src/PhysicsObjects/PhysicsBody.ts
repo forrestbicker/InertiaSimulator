@@ -125,7 +125,9 @@ export abstract class PhysicsBody {
 				// reverse vector for fictional force
 				f.x = -f.x;
 				f.y = -f.y;
-				this.drawForce(f, context);
+				context.setLineDash([5, 3]);
+				this.drawForce(position, f, context);
+				// context.setLineDash([1, 0]);
 			}
 		}
 
