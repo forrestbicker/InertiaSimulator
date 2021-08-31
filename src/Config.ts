@@ -1,9 +1,16 @@
 import { map, string } from "mathjs";
+import { Vector } from "./Math/Vector";
 
 export class Config {
 	static readonly fps: number = 32;
 	static readonly canvasWidth: number = 500; // px
 	static readonly canvasHeight: number = 500; // px
+	static readonly canvasOffset: Vector = new Vector(
+		Config.canvasWidth / 2, Config.canvasHeight / 2
+	) // determinies where 0, 0 on the coordinate plane lies. html canvas default plane has origin at top left with the positive x direction being rightwards and the positive y direction being downwards. 
+	// to set 0, 0 as the center, use w = width / 2 and h = height / 2
+	// to set 0, 0 as the bottom left, use w = 0 and h = height
+	
 	// 400
 	// darkBackground: '#171923',
 	// lightBackground: '#F7FAFC',

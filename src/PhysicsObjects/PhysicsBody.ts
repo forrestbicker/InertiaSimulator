@@ -64,7 +64,7 @@ export abstract class PhysicsBody {
 		// sums up forces to find net acceleration and solve for dv
 		for (var i = 0; i < this.forceArr.length; i++) {
 			let a = this.forceArr[i].at(this, dt); // f = ma where m = 1
-			this.v.x -= a.x * dt;
+			this.v.x += a.x * dt;
 			this.v.y -= a.y * dt;
 		}
 
@@ -77,8 +77,8 @@ export abstract class PhysicsBody {
 		// TODO: add different shape / custom shape drawings
 		context.beginPath();
 		context.arc(
-			position.x,
-			position.y + Config.canvasHeight,
+			position.x + Config.canvasOffset.x,
+			position.y + Config.canvasOffset.y,
 			10, 0, 2 * Math.PI
 		); // offset to center
 		context.fill();
