@@ -54,6 +54,14 @@ export class Universe {
 		this.bodies[bodyId].removeForce(this.forces[forceId]);
 	}
 
+	public removeForceFromReferenceFrame(forceId: number): void {
+		this.referenceFrame.removeForce(this.forces[forceId]);
+	}
+
+	public addForceToReferenceFrame(forceId: number): void {
+		this.referenceFrame.addForce(this.forces[forceId]);
+	}
+
 	private draw(): void {
 		this.inertialContext.clearRect(0, 0, Config.canvasWidth, Config.canvasHeight);
 		this.nonInertialContext.clearRect(0, 0, Config.canvasWidth, Config.canvasHeight);
@@ -102,5 +110,13 @@ export class Universe {
 			this.step(1 / Math.pow(2, 5));
 			this.draw();
 		}, Math.pow(2, 5));
+	}
+
+	public popBody(): PhysicsBody | undefined {
+		return this.bodies.pop();
+	}
+
+	public setNewFrameOfReference(frameOfReference: PhysicsBody): void {
+		this.referenceFrame = frameOfReference;
 	}
 }
