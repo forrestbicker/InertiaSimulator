@@ -23,12 +23,12 @@ export class VectorFunction implements DynamicVector {
 
 	/** evaluates the function for a given body's position and velocity at a given time
 	 */
-	at(body: PhysicsBody, time: number): Vector {
+	public at(body: PhysicsBody, time: number): Vector {
 		let mapping: Record<string, number> = { // mapping dict defines variables
 			x: body.r.x,
 			y: body.r.y,
 			vx: body.v.x,
-			yx: body.v.y,
+			yx: -body.v.y,
 			t: time
 		}
 		return new Vector(this.x.evaluate(mapping), this.y.evaluate(mapping));
