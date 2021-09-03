@@ -196,4 +196,14 @@ export function addForceToBody(bodyId: number, insertionPoint: HTMLTableElement,
 	}
 	newRow.appendChild(forceSelect);
 }
+
+export function reloadForceSelection(dropdown: HTMLSelectElement, universe: Universe): void {
+	// clear dropdown of all options
+	dropdown.innerHTML = ""
+	dropdown.innerHTML += '<option hidden disabled selected value> -- select a force -- </option>'
+
+	// populate dropdown with forces in universe
+	for (var i = 0; i < universe.getForcesLen(); i++) {
+		dropdown.appendChild(new Option(universe.getForce(i).getName(), String(i)));
+	}
 }
