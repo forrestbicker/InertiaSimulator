@@ -189,10 +189,21 @@ export function addForceToBody(bodyId: number, insertionPoint: HTMLTableElement,
 	let previouslySelected: number | undefined = undefined;
 	forceSelect.onchange = () => {
 		if (previouslySelected !== undefined) {
-			universe.removeForceFromBody(previouslySelected, bodyId);
+			if (bodyId == 0) {
+				universe.removeForceFromReferenceFrame(previouslySelected);
+			} else {
+				universe.removeForceFromBody(previouslySelected, bodyId - 1);
+			}
 		}
-		universe.addForceToBody(Number(forceSelect.value), bodyId)
+
 		previouslySelected = Number(forceSelect.value);
+
+		if (bodyId == 0) {
+			universe.addForceToReferenceFrame(previouslySelected)
+		} else {
+			universe.addForceToBody(previouslySelected, bodyId - 1);
+		}
+
 	}
 	newRow.appendChild(forceSelect);
 }
