@@ -7,11 +7,12 @@ import { Vector } from "./Math/Vector";
 import { Universe } from "./Universe";
 
 export let bodyTable: HTMLTableElement = <HTMLTableElement>document.getElementById("body-table")!;
-export function newBody(universe: Universe): void {
+
+export function newBody(universe: Universe, name?: string | undefined): void {
 	let bodyId: number = bodyTable.rows.length; // serves as the zero-based index of the body in the array
 	let newRow: HTMLTableRowElement = bodyTable.insertRow();
 	let propertyTable: HTMLTableElement = document.createElement("table");
-	propertyTable.id = `body-${bodyId + 1}`;
+	propertyTable.id = `body-${bodyId}`;
 
 	// main header of body table with name, body settings, and option to hide
 	let bodyHeader: HTMLTableSectionElement = propertyTable.createTHead();
@@ -21,7 +22,11 @@ export function newBody(universe: Universe): void {
 	// main header - name input
 	let nameCell: HTMLTableDataCellElement = document.createElement("td");
 	let nameInput: HTMLInputElement = createTextInputField();
-	nameInput.value = `Unnamed Body ${bodyId + 1}`;
+	if (name === undefined) {
+		nameInput.value = `Unnamed Body ${bodyId}`;
+	} else {
+		nameInput.value = name;
+	}
 	nameCell.appendChild(nameInput);
 	bodyHeader.appendChild(nameCell);
 	// // main header - color selection
@@ -70,7 +75,7 @@ export function newBody(universe: Universe): void {
 	initialConditionsHeader.appendChild(yHead);
 
 	// naming abbreviatinos
-	// trans -> translational
+	// trans -> translational	
 	// pos -> position
 	// vel -> velocity
 
@@ -111,9 +116,29 @@ export function newBody(universe: Universe): void {
 	transVelRow.appendChild(transVelYInputCell);
 
 
+	// <tr>
+	// 	<th><select class="input force-dropdown" type = "dropdown" >
+	// 		<option value="" > </option>
+	// 			< /th>
+	// 			< /tr>
+
+	// let angularPosRow: HTMLTableRowElement = propertyTable.insertRow();
+	// let angularPosLabel: HTMLTableHeaderCellElement = document.createElement("th");
+	// angularPosLabel.innerHTML = "θ<sub>i</sub>";
+
+	// let angularVelRow: HTMLTableRowElement = propertyTable.insertRow();
+	// let angularVelLabel: HTMLTableHeaderCellElement = document.createElement("th");
+	// angularVelLabel.innerHTML = "ω<sub>i</sub>";
+
 
 	newRow.appendChild(propertyTable);
 
+	let ri: DynamicVector = new HTMLVector(transPosXInputField, transPosYInputField);
+	let vi: DynamicVector = new HTMLVector(transVelXInputField, transVelYInputField);
+	let body: PhysicsBody = new HTMLBody(nameInput, ri, vi);
+	body.setColor(bodyHeader.style.backgroundColor); // sets color to match body header
+
+	universe.addBody(body);
 }
 export let forceTable: HTMLTableElement = <HTMLTableElement>document.getElementById("force-table")!;
 export function newForce(universe: Universe): void {
@@ -152,14 +177,14 @@ export function newForce(universe: Universe): void {
 	newRow.appendChild(yCell);
 
 	// add the force to universe
-
-	// add the force to dropdowns
-	let forceDropdowns: HTMLCollectionOf<Element> = document.getElementsByClassName("force-dropdown");
-	for (let i = 0; i < forceDropdowns.length; i++) {
-		let forceDropdown: HTMLSelectElement = <HTMLSelectElement>forceDropdowns[i];
-		forceDropdown.appendChild(new Option(`Unnamed Force ${forceId}`, String(forceId))) // there are two rows already in the table, so minus 2 gives one-based human-readable index
-	}
 	universe.addForce(new HTMLVector(xInput, yInput, nameInput));
+
+	// // add the force to dropdowns
+	// let forceDropdowns: HTMLCollectionOf<Element> = document.getElementsByClassName("force-dropdown");
+	// for (let i = 0; i < forceDropdowns.length; i++) {
+	// 	let forceDropdown: HTMLSelectElement = <HTMLSelectElement>forceDropdowns[i];
+	// 	forceDropdown.appendChild(new Option(`Unnamed Force ${forceId}`, String(forceId))) // there are two rows already in the table, so minus 2 gives one-based human-readable index
+	// }
 }
 
 export function bindButtons(universe: Universe): void {
